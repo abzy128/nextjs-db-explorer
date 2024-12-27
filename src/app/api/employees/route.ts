@@ -1,20 +1,21 @@
 import { NextResponse } from 'next/server';
+import { parse } from 'path';
 import { Pool } from 'pg';
 
 const defaultPool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
+  host: process.env.DB_HOST,
+  port: parseInt(process.env.DB_PORT ?? '5432'),
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
   database: 'postgres',
-  password: '7787878',
-  port: 5432,
 });
 
 const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
+  host: process.env.DB_HOST,
+  port: parseInt(process.env.DB_PORT ?? '5432'),
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
   database: 'employees',
-  password: '7787878',
-  port: 5432,
 });
 
 const ensureTableExists = async () => {
